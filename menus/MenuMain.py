@@ -21,6 +21,11 @@ class MainMenu(Menu):
             command=lambda: parent.show_page("page2")
         )
 
+        pages_menu.add_command(
+            label='Questionnaire',
+            command=lambda: parent.show_page("Questionnaire")
+        )
+
         file_menu = Menu(menubar, tearoff=False)
         file_menu.add_command(
             label='Exit',

@@ -5,6 +5,7 @@ import customtkinter as ctk
 
 from menus.MenuMain import MainMenu
 from pages.PageSet01 import StartPage, Page1, Page2
+from pages.Questionnaire import Questionnaire
 
 # Sets the appearance mode of the application
 # "System" sets the appearance same as that of the system
@@ -34,7 +35,7 @@ class App(ctk.CTk):
 
         # initializing frames to an empty array
         self.frames = {}
-        for page in (StartPage, Page1, Page2):
+        for page in (StartPage, Page1, Page2, Questionnaire):
             frame = page(container, self)
             frame.grid(row=0, column=0, sticky="nsew")
             self.frames[page] = frame
@@ -51,6 +52,11 @@ class App(ctk.CTk):
             self.show_frame(Page1)
         elif page_name == 'page2':
             self.show_frame(Page2)
+        elif page_name == 'Questionnaire':
+            self.show_frame(Questionnaire)
+
+        #Questionnaire.py
+
 
     def show_frame(self, cont):
         frame = self.frames[cont]
