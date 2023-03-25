@@ -10,10 +10,11 @@ def getDropDownOccupation(parent, row: int):
 
     # Occupation combo box
     parent.occupationOptionMenu = ctk.CTkOptionMenu(parent,
-                                                  values=["Not Set",
-                                                          "Student",
-                                                          "Professional"])
-
+                                                   values=["Not Set",
+                                                           "Student",
+                                                           "Professional"],
+                                                    command=parent.generateResults)
+   # parent.occupationOptionMenu.bind('<FocusOut>', parent.generateResults)
     parent.occupationOptionMenu.grid(row=row, column=1,
                                    padx=20, pady=20,
                                    columnspan=2, sticky="ew")

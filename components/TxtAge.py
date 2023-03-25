@@ -10,11 +10,8 @@ def getTxtAge(parent, row: int):
 
     # Age Entry Field
     vAge = (parent.register(validAge))
-    parent.ageEntry = ctk.CTkEntry(parent,
-                                   placeholder_text="18",
-                                   )
-#                                   validate='all',
-#                                   validatecommand=(vAge, '%P')
+    parent.ageEntry = ctk.CTkEntry(parent,placeholder_text="18",)
+    parent.ageEntry.bind('<FocusOut>', parent.generateResults)
 
     parent.ageEntry.grid(row=row, column=1,
                        columnspan=3, padx=20,

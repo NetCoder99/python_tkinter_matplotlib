@@ -9,7 +9,9 @@ def getTxtName(parent, row: int):
 
     # Name Entry Field
     parent.nameEntry = ctk.CTkEntry(parent,
-                                  placeholder_text="Teja")
+                                    placeholder_text="Teja",
+                                    )
+    parent.nameEntry.bind('<FocusOut>', parent.generateResults)
     parent.nameEntry.grid(row=row, column=1,
                         columnspan=3, padx=20,
                         pady=20, sticky="ew")

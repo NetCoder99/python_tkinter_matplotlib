@@ -40,14 +40,16 @@ class Questionnaire(ctk.CTkFrame):
 
     # This function is used to insert the
     # details entered by users into the textbox
-    def generateResults(self):
+    def generateResults(self, event=None):
         Font_tuple_bold_12 = ("Courier", 12, "bold")
         Font_tuple_bold_14 = ("Courier", 14, "bold")
 
+        text = self.createText()
+        self.displayBox.configure(state="normal")
         self.displayBox.delete("0.0", END)
         self.displayBox.configure(font=Font_tuple_bold_12)
-        text = self.createText()
         self.displayBox.insert("0.0", text)
+        self.displayBox.configure(state="disabled")
 
     # This function is used to get the selected
     # options and text from the available entry

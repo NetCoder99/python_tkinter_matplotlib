@@ -12,24 +12,27 @@ def getBtnGenderRadio(parent, row: int):
     parent.genderVar = ctk.StringVar(value="Prefer not to say")
 
     parent.maleRadioButton = ctk.CTkRadioButton(parent,
-                                              text="Male",
-                                              variable=parent.genderVar,
-                                              value="Male")
+                                                text="Male",
+                                                variable=parent.genderVar,
+                                                value="Male",
+                                                command=parent.generateResults)
     parent.maleRadioButton.grid(row=row, column=1, padx=20,
                               pady=20, sticky="ew")
 
     parent.femaleRadioButton = ctk.CTkRadioButton(parent,
-                                                text="Female",
-                                                variable=parent.genderVar,
-                                                value="Female")
+                                                  text="Female",
+                                                  variable=parent.genderVar,
+                                                  value="Female",
+                                                  command=parent.generateResults)
     parent.femaleRadioButton.grid(row=row, column=2,
                                 padx=20,
                                 pady=20, sticky="ew")
 
     parent.noneRadioButton = ctk.CTkRadioButton(parent,
-                                              text="Prefer not to say",
-                                              variable=parent.genderVar,
-                                              value="Prefer not to say")
+                                                text="Prefer not to say",
+                                                variable=parent.genderVar,
+                                                value="Prefer not to say",
+                                                command=parent.generateResults)
     parent.noneRadioButton.grid(row=row, column=3,
                               padx=20, pady=20,
                               sticky="ew")
