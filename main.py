@@ -36,33 +36,34 @@ class App(ctk.CTk):
         self.grid_columnconfigure(0, weight=1)
 
         menubar = MainMenu(self)
+        frame_dict = {'row':0, 'column':0, 'padx':20, 'pady':20, 'sticky':"nsew"}
 
         self.StartPage = StartPage(parent=self)
-        self.StartPage.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.StartPage.grid(**frame_dict)
         self.StartPage.grid_remove()
 
         self.Page1 = Page1(parent=self)
-        self.Page1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.Page1.grid(**frame_dict)
         self.Page1.grid_remove()
 
         self.Page2 = Page2(parent=self)
-        self.Page2.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.Page2.grid(**frame_dict)
         self.Page2.grid_remove()
 
         self.Questionnaire = Questionnaire(parent=self)
-        self.Questionnaire.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.Questionnaire.grid(**frame_dict)
         self.Questionnaire.grid_remove()
 
         self.MatPlotPage1 = MatPlotPage1(parent=self)
-        self.MatPlotPage1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.MatPlotPage1.grid(**frame_dict)
         self.MatPlotPage1.grid_remove()
 
         self.CanvasPage = CanvasPage(parent=self)
-        self.CanvasPage.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.CanvasPage.grid(**frame_dict)
         self.CanvasPage.grid_remove()
 
-        self.CanvasPage.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        self.active_page = self.CanvasPage
+        self.MatPlotPage1.grid()
+        self.active_page = self.MatPlotPage1
 
 
     def show_frame(self, page_name:str):
