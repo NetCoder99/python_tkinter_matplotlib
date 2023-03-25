@@ -8,27 +8,25 @@ from components.DropDownOccupation import getDropDownOccupation
 from components.TxtAge import getTxtAge
 from components.TxtName import getTxtName
 
-pageWidth, pageHeight = 600, 700
+LARGEFONT = ("Verdana", 35)
 
 class Questionnaire(ctk.CTkFrame):
     def __init__(self, parent, controller):
         ctk.CTkFrame.__init__(self, parent)
-        #self.CTktitle("GUI Questionnaire")
-        #parent.geometry(f"{pageWidth}x{pageHeight}")
+        label = ctk.CTkLabel(self, text="Questionnaire", font=LARGEFONT)
+        label.grid(row=0, column=1, padx=10, pady=10, columnspan=4)
 
-        #vcmd = (self.register(self.callback))
-
-        getTxtName(self, 0)
-        getTxtAge(self, 1)
-        getBtnGenderRadio(self, 2)
-        getChkBoxChoice(self)
-        getDropDownOccupation(self)
+        getTxtName(self, 1)
+        getTxtAge(self, 2)
+        getBtnGenderRadio(self, 3)
+        getChkBoxChoice(self, 4)
+        getDropDownOccupation(self, 5)
 
         # Generate Button
         self.generateResultsButton = ctk.CTkButton(self,
                                                    text="Generate Results",
                                                    command=self.generateResults)
-        self.generateResultsButton.grid(row=5, column=1,
+        self.generateResultsButton.grid(row=6, column=1,
                                         columnspan=2,
                                         padx=20, pady=20,
                                         sticky="ew")
@@ -36,7 +34,7 @@ class Questionnaire(ctk.CTkFrame):
         # Text Box
         self.displayBox = ctk.CTkTextbox(self, width=300,
                                          height=100)
-        self.displayBox.grid(row=6, column=0, columnspan=4,
+        self.displayBox.grid(row=7, column=0, columnspan=4,
                              padx=20, pady=20, sticky="nsew")
 
 
@@ -87,11 +85,3 @@ class Questionnaire(ctk.CTkFrame):
     def getOccupation(self):
         return self.occupationOptionMenu.get()
 
-
-    # def callback(self, P):
-    #     if str.isdigit(P) or P == "":
-    #         print('callback True : {}'.format(P))
-    #         return True
-    #     else:
-    #         print('callback False: {}'.format(P))
-    #         return False

@@ -1,9 +1,8 @@
-# Import customtkinter module
-from tkinter import Menu
-
 import customtkinter as ctk
 
 from menus.MenuMain import MainMenu
+from pages.MatPlotLibDemo1 import MatPlotPage1
+from pages.PageEnums import PagesEnum
 from pages.PageSet01 import StartPage, Page1, Page2
 from pages.Questionnaire import Questionnaire
 
@@ -16,6 +15,13 @@ ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("green")
 
 appWidth, appHeight = 900, 800
+class MyFrame(ctk.CTkFrame):
+    def __init__(self, master, **kwargs):
+        super().__init__(master, **kwargs)
+
+        # add widgets onto the frame...
+        self.label = ctk.CTkLabel(self)
+        self.label.grid(row=0, column=0, padx=20)
 
 # Create App class
 class App(ctk.CTk):
@@ -25,45 +31,59 @@ class App(ctk.CTk):
 
         self.title("GUI Application")
         self.geometry(f"{appWidth}x{appHeight}")
+        self.grid_rowconfigure(0, weight=1)  # configure grid system
+        self.grid_columnconfigure(0, weight=1)
 
-        # creating a container
-        container = ctk.CTkFrame(self)
-        container.pack(side="top", fill="both", expand=True)
+        menubar = MainMenu(self)
 
-        container.grid_rowconfigure(0, weight=1)
-        container.grid_columnconfigure(0, weight=1)
+        self.StartPage = StartPage(parent=self)
+        self.StartPage.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.StartPage.grid_forget()
 
-        # initializing frames to an empty array
-        self.frames = {}
-        for page in (StartPage, Page1, Page2, Questionnaire):
-            frame = page(container, self)
-            frame.grid(row=0, column=0, sticky="nsew")
-            self.frames[page] = frame
+        self.Page1 = Page1(parent=self)
+        self.Page1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.Page1.grid_forget()
 
-        self.show_frame(StartPage)
+        self.Page2 = Page2(parent=self)
+        self.Page2.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.Page2.grid_forget()
 
-        # initializing the main menu
-        menubar = MainMenu(self, container)
+        self.MatPlotPage1 = MatPlotPage1(parent=self)
+        self.MatPlotPage1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.MatPlotPage1.grid_forget()
 
-    def show_page(self, page_name):
-        if page_name == 'start':
-            self.show_frame(StartPage)
-        elif page_name == 'page1':
-            self.show_frame(Page1)
-        elif page_name == 'page2':
-            self.show_frame(Page2)
-        elif page_name == 'Questionnaire':
-            self.show_frame(Questionnaire)
-
-        #Questionnaire.py
+        self.StartPage.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.active_page = self.StartPage
 
 
-    def show_frame(self, cont):
-        frame = self.frames[cont]
-        frame.tkraise()
+    def show_frame(self, page_name:str):
+        print('Showing frame: {}'.format(page_name.name))
+        for obj in self.children:
+            print('obj:{}'.format(obj))
+            if obj.casefold().__contains__(page_name.name.casefold()):
+                tmp = self.children[obj]
+                tmp.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+                self.active_page.grid_forget()
+                self.active_page = tmp
+
+        #crnt_page = self.active_page
+        #self.Page1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        #self.Page1.grid()
+        #self.active_page = self.Page1
+
+        #print('Showing frame: {}'.format(page_name.name))
+        #next_frame = self.frames[page_name.name]
+        #self.visible_frame.grid_forget()
+        #next_frame.grid()
+        #self.visible_frame = next_frame
+
+    def shutdown_app(self):
+        print('Shutting down 1')
+        app.quit()
 
 # ----------------------------------------------------
 if __name__ == "__main__":
     app = App()
-    # Runs the app
+    # trap the close event to kill the matplotlib agent
+    app.protocol('WM_DELETE_WINDOW', app.shutdown_app)
     app.mainloop()
