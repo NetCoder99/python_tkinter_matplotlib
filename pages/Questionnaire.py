@@ -11,7 +11,7 @@ from components.TxtName import getTxtName
 LARGEFONT = ("Verdana", 35)
 
 class Questionnaire(ctk.CTkFrame):
-    def __init__(self, parent, controller):
+    def __init__(self, parent):
         ctk.CTkFrame.__init__(self, parent)
         label = ctk.CTkLabel(self, text="Questionnaire", font=LARGEFONT)
         label.grid(row=0, column=1, padx=10, pady=10, columnspan=4)

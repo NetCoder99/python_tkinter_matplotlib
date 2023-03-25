@@ -1,6 +1,7 @@
 import customtkinter as ctk
 
 from menus.MenuMain import MainMenu
+from pages.CanvasDemo import CanvasPage
 from pages.MatPlotLibDemo1 import MatPlotPage1
 from pages.PageEnums import PagesEnum
 from pages.PageSet01 import StartPage, Page1, Page2
@@ -38,44 +39,43 @@ class App(ctk.CTk):
 
         self.StartPage = StartPage(parent=self)
         self.StartPage.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        self.StartPage.grid_forget()
+        self.StartPage.grid_remove()
 
         self.Page1 = Page1(parent=self)
         self.Page1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        self.Page1.grid_forget()
+        self.Page1.grid_remove()
 
         self.Page2 = Page2(parent=self)
         self.Page2.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        self.Page2.grid_forget()
+        self.Page2.grid_remove()
+
+        self.Questionnaire = Questionnaire(parent=self)
+        self.Questionnaire.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.Questionnaire.grid_remove()
 
         self.MatPlotPage1 = MatPlotPage1(parent=self)
         self.MatPlotPage1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        self.MatPlotPage1.grid_forget()
+        self.MatPlotPage1.grid_remove()
 
-        self.StartPage.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        self.active_page = self.StartPage
+        self.CanvasPage = CanvasPage(parent=self)
+        self.CanvasPage.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.CanvasPage.grid_remove()
+
+        self.CanvasPage.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
+        self.active_page = self.CanvasPage
 
 
     def show_frame(self, page_name:str):
         print('Showing frame: {}'.format(page_name.name))
         for obj in self.children:
             print('obj:{}'.format(obj))
-            if obj.casefold().__contains__(page_name.name.casefold()):
+            if obj.replace('!', '').casefold() == (page_name.name.casefold()):
+                print('found: {} : {}'.format(page_name.name, obj))
                 tmp = self.children[obj]
                 tmp.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-                self.active_page.grid_forget()
+                self.active_page.grid_remove()
                 self.active_page = tmp
 
-        #crnt_page = self.active_page
-        #self.Page1.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
-        #self.Page1.grid()
-        #self.active_page = self.Page1
-
-        #print('Showing frame: {}'.format(page_name.name))
-        #next_frame = self.frames[page_name.name]
-        #self.visible_frame.grid_forget()
-        #next_frame.grid()
-        #self.visible_frame = next_frame
 
     def shutdown_app(self):
         print('Shutting down 1')

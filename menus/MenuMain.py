@@ -25,12 +25,17 @@ class MainMenu(Menu):
 
         pages_menu.add_command(
             label='MatPlot Demo 001',
-            command=lambda: parent.show_frame("MatPlotPage1")
+            command=lambda: parent.show_frame(PagesEnum.matplotpage1)
         )
 
         pages_menu.add_command(
             label='Questionnaire',
-            command=lambda: parent.show_frame("Questionnaire")
+            command=lambda: parent.show_frame(PagesEnum.Questionnaire)
+        )
+
+        pages_menu.add_command(
+            label='CanvasPage',
+            command=lambda: parent.show_frame(PagesEnum.CanvasPage)
         )
 
         file_menu = Menu(menubar, tearoff=False)

@@ -19,7 +19,7 @@ class MatPlotPage1(ctk.CTkFrame):
         canvas = FigureCanvasTkAgg(fig1, master=parent)
         canvas.draw()
 
-        tmp = canvas.get_tk_widget().grid(row=1, column=0, padx=20, ipady=20)
+        #tmp = canvas.get_tk_widget().grid(row=1, column=0, padx=20, ipady=20)
         #canvas.get_tk_widget().pack(side="top", fill="both", expand=True)
 
         print('MatPlotPage1 - initialized')
