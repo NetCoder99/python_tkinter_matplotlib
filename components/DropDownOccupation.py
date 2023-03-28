@@ -14,7 +14,7 @@ def getDropDownOccupation(parent, row: int):
                                                            "Student",
                                                            "Professional"],
                                                     command=parent.generateResults)
-   # parent.occupationOptionMenu.bind('<FocusOut>', parent.generateResults)
+
     parent.occupationOptionMenu.grid(row=row, column=1,
                                    padx=20, pady=20,
                                    columnspan=2, sticky="ew")

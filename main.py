@@ -1,5 +1,6 @@
 import customtkinter as ctk
 
+from components.StatusBar import StatusBar
 from menus.MenuMain import MainMenu
 from pages.CanvasDemo import CanvasPage
 from pages.MatPlotLibDemo1 import MatPlotPage1
@@ -16,14 +17,14 @@ ctk.set_appearance_mode("System")
 ctk.set_default_color_theme("green")
 
 appWidth, appHeight = 900, 800
-class MyFrame(ctk.CTkFrame):
-    def __init__(self, master, **kwargs):
-        super().__init__(master, **kwargs)
-
-        # add widgets onto the frame...
-        self.label = ctk.CTkLabel(self)
-        self.label.grid(row=0, column=0, padx=20)
-
+# class MyFrame(ctk.CTkFrame):
+#     def __init__(self, master, **kwargs):
+#         super().__init__(master, **kwargs)
+#
+#         # add widgets onto the frame...
+#         self.label = ctk.CTkLabel(self)
+#         self.label.grid(row=0, column=0, padx=20)
+#
 # Create App class
 class App(ctk.CTk):
     # Layout of the GUI will be written in the init itself
@@ -32,11 +33,11 @@ class App(ctk.CTk):
 
         self.title("GUI Application")
         self.geometry(f"{appWidth}x{appHeight}")
-        self.grid_rowconfigure(0, weight=1)  # configure grid system
-        self.grid_columnconfigure(0, weight=1)
+        self.grid_rowconfigure    (0, weight=1)  # configure grid system
+        self.grid_columnconfigure (0, weight=1)
 
         menubar = MainMenu(self)
-        frame_dict = {'row':0, 'column':0, 'padx':20, 'pady':20, 'sticky':"nsew"}
+        frame_dict = {'row':0, 'column':0, 'padx':10, 'pady':10, 'sticky':"nsew"}
 
         self.StartPage = StartPage(parent=self)
         self.StartPage.grid(**frame_dict)
@@ -65,13 +66,25 @@ class App(ctk.CTk):
         self.MatPlotPage1.grid()
         self.active_page = self.MatPlotPage1
 
+        self.statusFrame  = ctk.CTkFrame(self)
+        self.StatusBar    = StatusBar(self.statusFrame)
+        #self.statusFrame.pack(side='bottom', fill='both', expand=True)
+        self.statusFrame.grid(row=2, column=0, sticky="ew")
 
     def show_frame(self, page_name:str):
         print('Showing frame: {}'.format(page_name.name))
+        active_page_name = str(self.active_page).replace('!', '').replace('.', '').casefold()
+        if active_page_name == page_name.name.casefold():
+            print('same page:{}:{}'.format(active_page_name, page_name.name))
+            return
+
         for obj in self.children:
             print('obj:{}'.format(obj))
+
             if obj.replace('!', '').casefold() == (page_name.name.casefold()):
-                print('found: {} : {}'.format(page_name.name, obj))
+                print('found: {} : {} : {}'.format(self.active_page,
+                                                   obj.replace('!', '').casefold(),
+                                                   page_name.name.casefold()))
                 tmp = self.children[obj]
                 tmp.grid(row=0, column=0, padx=20, pady=20, sticky="nsew")
                 self.active_page.grid_remove()
